@@ -1,0 +1,4 @@
+<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+
+<body class="p-6">
+<div class="p-40 m-10">
