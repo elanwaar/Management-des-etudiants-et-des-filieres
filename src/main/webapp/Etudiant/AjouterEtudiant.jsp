@@ -7,14 +7,20 @@
   Time: 2:05 PM
   To change this template use File | Settings | File Templates.
 --%>
+<head>
+    <link href="${pageContext.request.contextPath}/ajouterEtudiant.css" rel="stylesheet">
 
+</head>
 <%@include file="../Components/Header.jspf" %>
 <%@include file="../Components/Navigation-Bar.jspf" %>
-<%@include file="../Components/body.jspf" %>
 
-<div id="liveAlertPlaceholder"></div>
-<form id="formId" method="post" action="${pageContext.request.contextPath}/EtudiantServlet?action=ajouter">
-    <div class="row mb-3">
+<body class="p-6">
+
+<div class="p-40 pt-0 m-10" style=" display: flex; align-items: center; flex-direction: column">
+    <div id="liveAlertPlaceholder" style="width: 60%;"></div>
+<div class="card p-5" style="width: 60%;" id="bodyContainer">
+<form id="formId" method="post" class="mt-10 p-10" style="display: flex; flex-direction: column" method="post" action="${pageContext.request.contextPath}/EtudiantServlet?action=ajouter">
+    <div class="row mb-3" style="display: flex; justify-content: center;">
         <label class="col-sm-2 col-form-label" >Nom:</label>
         <div class="col-sm-10">
             <input id="nom" type="text" name="nom" placeholder="Nom" class="form-control"/>
@@ -57,11 +63,12 @@
         </div>
 
     </div>
-
-
-
     <button type="submit" class="btn btn-primary" >Submit</button>
+
 </form>
+</div>
+</div>
+</body>
 <script>
 
     const prenom = document.getElementById("prenom");

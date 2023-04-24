@@ -9,12 +9,14 @@
 
 <%@include file="../Components/Header.jspf" %>
 <%@include file="../Components/Navigation-Bar.jspf" %>
-<%@include file="../Components/body.jspf" %>
 
 <%List<Filiere> list_filiere= (List<Filiere>) request.getAttribute("list_filiere");%>
 <%int noOfPages = Integer.parseInt(request.getAttribute("noOfPages").toString());%>
 <%int currentPage = Integer.parseInt(request.getAttribute("currentPage").toString());%>
 
+<body class="p-6">
+<div class="p-40 pt-0 m-10 mt-0">
+<div id="content" class="mt-10 card card p-10">
     <table class="table table-bordered">
         <tr>
             <th>ID</th>
@@ -38,16 +40,18 @@
             </tr>
         <%}%>
     </table>
+</div>
 
 
 
-    <nav aria-label="Page navigation example">
+
+    <nav aria-label="Page navigation example" class="mt-10">
         <ul class="pagination justify-content-center">
             <%
                 //For displaying Previous link except for the 1st page
                 if (currentPage > 1){ %>
                     <li class="page-item enabled">
-                        <a class="page-link" href="/FiliereServlet?page=<%=currentPage-1%>">Previous</a>
+                        <a class="page-link" href="/FiliereServlet?page=<%=currentPage-1%>" onclick="loadDoc()">Previous</a>
                     </li>
             <%}else{%>
                 <li class="page-item disabled">
@@ -74,8 +78,19 @@
 
         </ul>
     </nav>
+</body>
+<script>
 
+    function loadDoc() {
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function() {
+            document.getElementById("content").innerHTML = this.responseText;
+        }
+        xhttp.open("GET", "/Services/FiliereService", true);
+        xhttp.send();
+    }
 
+</script>
 
 
 

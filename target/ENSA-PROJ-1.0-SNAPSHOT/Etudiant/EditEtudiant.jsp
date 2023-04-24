@@ -15,11 +15,12 @@
 
 <%@include file="../Components/Header.jspf" %>
 <%@include file="../Components/Navigation-Bar.jspf" %>
-<%@include file="../Components/body.jspf" %>
 
-<div id="liveAlertPlaceholder"></div>
-
-<form id="formId" method="post" action="${pageContext.request.contextPath}/EtudiantServlet?action=edit&id=<%=request.getAttribute("id")%>">
+<body class="p-6">
+<div class="p-40 pt-0 m-10" style="display: flex; align-items: center; flex-direction: column">
+    <div id="liveAlertPlaceholder" style="width: 60%;"></div>
+    <div class="card p-10" style="width: 60%;">
+<form id="formId" class="mt-10" method="post" action="${pageContext.request.contextPath}/EtudiantServlet?action=edit&id=<%=request.getAttribute("id")%>">
     <%
         EtudiantService etudiantService = new EtudiantService();
         Etudiant etudiant = etudiantService.FindById(Integer.parseInt(request.getAttribute("id").toString()));
@@ -52,6 +53,8 @@
     <div class="row-mb-3 flex mb-4">
         <label class="col-form-label col-sm-2">Sexe:</label>
         <div class="col-sm-4">
+            <% String sexe =etudiant.getSexe();
+            %>
             <input type="radio" name="sexe" class="form-check-input" value="male" id="male">
             <label class="form-check-label">Male</label>
             <input type="radio" name="sexe" class="form-check-input" value="female" id="female">
@@ -89,34 +92,30 @@
 
 
 </form>
+</div>
+</div>
+</body>
 <script>
 
     const prenom = document.getElementById("prenom");
     const nom = document.getElementById("nom");
     const form = document.getElementById("formId");
-
     const male = document.getElementById("male")
     const female = document.getElementById("female")
 
-    async function getSexe() {
-        let myPromise = new Promise(function(resolve) {
-            window.onload = ()=>{
-                console.log("getSexe()")
-                resolve(<%=etudiant.getSexe()%>);
-            }
-        });
-        const sexe = await myPromise;
-        if(sexe === "male"){
+
+    window.onload = ()=>{
+        const sexe = '<%=sexe%>'
+        if(sexe === "male")
+        {
             male.checked = true
         }
-        else{
-            female.checked = true
+        else if(sexe === "female"){
+            female.checked = true;
         }
 
+
     }
-
-    getSexe();
-
 
     const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
     async function appendAlert (event) {

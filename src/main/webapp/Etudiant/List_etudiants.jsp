@@ -11,11 +11,12 @@
 
 <%@include file="../Components/Header.jspf" %>
 <%@include file="../Components/Navigation-Bar.jspf" %>
-<%@include file="../Components/body.jspf" %>
 
 <%List<Etudiant> list_etudiant= (List<Etudiant>) request.getAttribute("list_Etudiants");%>
-
-<table class="table table-bordered">
+<body class="p-6">
+<div class="p-40 pt-0 m-10 mt-0" style=" display: flex; justify-content: center">
+<div class="card card p-10 mt-10">
+<table class="table table-bordered mt-10">
     <tr>
         <th>ID</th>
         <th>Nom</th>
@@ -49,6 +50,8 @@
     <%}%>
 
 </table>
-
+</div>
+</div>
+</body>
 <%@include file="../Components/Footer.jspf" %>
 

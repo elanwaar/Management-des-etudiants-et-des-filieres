@@ -9,24 +9,24 @@
 
 <%@include file="../Components/Header.jspf" %>
 <%@include file="../Components/Navigation-Bar.jspf" %>
-<%@include file="../Components/body.jspf" %>
-
-<div id="liveAlertPlaceholder"></div>
-
-<form id="formId" method="post" action="${pageContext.request.contextPath}/FiliereServlet?action=edit&id=<%=request.getAttribute("id")%>">
+<body class="p-6">
+<div class="p-40 pt-0 m-10 " style="display: flex; align-items: center; flex-direction: column">
+<div id="liveAlertPlaceholder" style="width: 60%;"></div>
+<div class="card card p-10 " style="width: 60%;">
+<form id="formId" class="mt-10" method="post" action="${pageContext.request.contextPath}/FiliereServlet?action=edit&id=<%=request.getAttribute("id")%>">
     <%
         FiliereService filiereService = new FiliereService();
         Filiere filiere = filiereService.FindById(Integer.parseInt(request.getAttribute("id").toString()));
     %>
     <div class="row-mb-3 flex mb-4">
-        <label class="col-form-label col-sm-2">ID de Filiere:</label>
+        <label class="col-form-label col-sm-3">ID de Filiere:</label>
         <div class="col-sm-4">
             <input class="form-control" type="text" name="idFil" value="<%=filiere.getIdFil()%>" disabled/>
         </div>
     </div>
 
     <div class="row-mb-3 flex mb-4">
-        <label class="col-form-label col-sm-2">Nom de Filiere:</label>
+        <label class="col-form-label col-sm-3">Nom de Filiere:</label>
         <div class="col-sm-4">
             <input class="form-control" id="nom" type="text" name="nom" value="<%=filiere.getNomFil()%>"/>
         </div>
@@ -34,8 +34,9 @@
     <button class="btn btn-primary" type="submit" value="">Submit</button>
 
 </form>
-
-
+</div>
+</div>
+</body>
 
 <script>
 

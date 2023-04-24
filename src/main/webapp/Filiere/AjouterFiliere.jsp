@@ -11,23 +11,27 @@
 
 <%@include file="../Components/Header.jspf" %>
 <%@include file="../Components/Navigation-Bar.jspf" %>
-<%@include file="../Components/body.jspf" %>
 
-<div id="liveAlertPlaceholder"></div>
+<body class="p-6">
+<div class="p-40 pt-0 m-10" style=" display: flex; align-items: center; flex-direction: column">
+<div id="liveAlertPlaceholder" style="width: 60%;"></div>
+<div class="card card p-10" style="width: 60%;">
+<form id="formId" class="mt-10 p-10" style="display: flex; flex-direction: column;" method="post" action="${pageContext.request.contextPath}/FiliereServlet?action=ajouter">
 
-<form id="formId" method="post" action="${pageContext.request.contextPath}/FiliereServlet?action=ajouter">
-
-    <div class="row-mb-3">
-        <label class="col-form-label col-sm-2">Nom de Filiere:</label>
+    <div class="row-mb-3" style="display: flex; justify-content: center;">
+        <label class="col-form-label col-sm-3">Nom de Filiere:</label>
         <div class="col-sm-10">
             <input id="nom" class="form-control" type="text" name="nom" placeholder="Nom" />
         </div>
     </div>
 
-    <button type="submit" value="" class="btn btn-primary">Submit</button>
+    <button type="submit" value="" class="btn btn-primary col-sm-4 mt-10" style="align-self: center">Submit</button>
 
 
 </form>
+</div>
+</div>
+</body>
 <script>
 
     const nom = document.getElementById("nom");
