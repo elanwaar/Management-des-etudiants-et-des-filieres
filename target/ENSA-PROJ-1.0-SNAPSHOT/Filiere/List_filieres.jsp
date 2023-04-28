@@ -1,11 +1,5 @@
 <%@ page import="ensat.dca.Model.Filiere" %>
-<%@ page import="java.util.List" %><%--
-  Created by IntelliJ IDEA.
-  User: anwar
-  Date: 4/9/2023
-  Time: 11:14 AM
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="java.util.List" %>
 
 <%@include file="../Components/Header.jspf" %>
 <%@include file="../Components/Navigation-Bar.jspf" %>
@@ -42,9 +36,6 @@
     </table>
 </div>
 
-
-
-
     <nav aria-label="Page navigation example" class="mt-10">
         <ul class="pagination justify-content-center">
             <%
@@ -78,7 +69,8 @@
 
         </ul>
     </nav>
-</body>
+</div>
+
 <script>
 
     function loadDoc() {
@@ -91,12 +83,6 @@
     }
 
 </script>
-
-
-
-
-
-
 
 
 <%@include file="../Components/Footer.jspf" %>

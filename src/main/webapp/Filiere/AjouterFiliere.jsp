@@ -1,21 +1,15 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: anwar
-  Date: 4/9/2023
-  Time: 6:12 AM
-  To change this template use File | Settings | File Templates.
---%>
-
-
-
-
 <%@include file="../Components/Header.jspf" %>
 <%@include file="../Components/Navigation-Bar.jspf" %>
 
 <body class="p-6">
+
 <div class="p-40 pt-0 m-10" style=" display: flex; align-items: center; flex-direction: column">
-<div id="liveAlertPlaceholder" style="width: 60%;"></div>
+
+    <!-- le message d'error si le champ nom ou prénom est vide -->
+    <div id="liveAlertPlaceholder" style="width: 60%;"></div>
+
 <div class="card card p-10" style="width: 60%;">
+
 <form id="formId" class="mt-10 p-10" style="display: flex; flex-direction: column;" method="post" action="${pageContext.request.contextPath}/FiliereServlet?action=ajouter">
 
     <div class="row-mb-3" style="display: flex; justify-content: center;">
@@ -32,6 +26,7 @@
 </div>
 </div>
 </body>
+
 <script>
 
     const nom = document.getElementById("nom");
@@ -39,6 +34,10 @@
 
     const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
     async function appendAlert (event) {
+
+        if(alertPlaceholder.innerHTML!=""){
+            alertPlaceholder.innerHTML = "";
+        }
         if(nom.value === ""){
             event.preventDefault()
             const wrapper = document.createElement('div')
@@ -51,7 +50,6 @@
 
             alertPlaceholder.append(wrapper)
         }
-
     }
     form.addEventListener('submit', appendAlert);
 

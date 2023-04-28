@@ -22,7 +22,6 @@ import java.util.List;
 @WebServlet(name = "FiliereServlet", value = "/FiliereServlet")
 public class FiliereServlet extends HttpServlet {
 
-    //Connection connexion = DAO.getConnection();
     FiliereService filiereService=new FiliereService();
 
     @SneakyThrows
@@ -41,28 +40,24 @@ public class FiliereServlet extends HttpServlet {
 
         else if(req.getParameter("action")==null){
 
-            //List<Filiere> list_filieres = filiereService.FindAll();
-            //req.setAttribute("list_filieres", list_filieres);
-            //RequestDispatcher dispatcher = req.getRequestDispatcher("/Filiere/List_filieres.jsp");
-            //dispatcher.forward(req, resp);
-
             int page = 1;
             int recordsPerPage = 5;
+
             if (req.getParameter("page") != null)
-                page = Integer.parseInt(
-                        req.getParameter("page"));
+                page = Integer.parseInt(req.getParameter("page"));
+
             FiliereService filiereService = new FiliereService();
             List<Filiere> list = filiereService.FindAll(
-                    (page - 1) * recordsPerPage,
-                    recordsPerPage);
+                    (page - 1) * recordsPerPage, recordsPerPage);
+
             int noOfRecords = filiereService.getNoOfRecords();
-            int noOfPages = (int)Math.ceil(noOfRecords * 1.0
-                    / recordsPerPage);
+            int noOfPages = (int)Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+
             req.setAttribute("list_filiere", list);
             req.setAttribute("noOfPages", noOfPages);
             req.setAttribute("currentPage", page);
-            RequestDispatcher view
-                    = req.getRequestDispatcher("/Filiere/List_filieres.jsp");
+
+            RequestDispatcher view = req.getRequestDispatcher("/Filiere/List_filieres.jsp");
             view.forward(req, resp);
         }
     }

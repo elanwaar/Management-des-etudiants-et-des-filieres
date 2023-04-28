@@ -5,21 +5,18 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Collections" %>
 <%@ page import="ensat.dca.Controleurs.FiliereServlet" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: anwar
-  Date: 4/9/2023
-  Time: 3:03 PM
-  To change this template use File | Settings | File Templates.
---%>
+
 
 <%@include file="../Components/Header.jspf" %>
 <%@include file="../Components/Navigation-Bar.jspf" %>
 
 <body class="p-6">
 <div class="p-40 pt-0 m-10" style="display: flex; align-items: center; flex-direction: column">
+
+    <!-- le message d'error si le champ nom ou prénom est vide -->
     <div id="liveAlertPlaceholder" style="width: 60%;"></div>
-    <div class="card p-10" style="width: 60%;">
+
+<div class="card p-10" style="width: 60%;">
 <form id="formId" class="mt-10" method="post" action="${pageContext.request.contextPath}/EtudiantServlet?action=edit&id=<%=request.getAttribute("id")%>">
     <%
         EtudiantService etudiantService = new EtudiantService();
@@ -31,7 +28,6 @@
         <div class="col-sm-4">
             <input class="form-control" type="text" name="idEtu" value="<%=etudiant.getIdE()%>" disabled>
         </div>
-
     </div>
 
     <div class="row-mb-3 flex mb-4">
@@ -47,9 +43,8 @@
         <div class="col-sm-4">
             <input id="prenom" class="form-control" type="text" name="prenom" value="<%=etudiant.getPrenom()%>"/>
         </div>
-
-
     </div>
+
     <div class="row-mb-3 flex mb-4">
         <label class="col-form-label col-sm-2">Sexe:</label>
         <div class="col-sm-4">
@@ -60,9 +55,8 @@
             <input type="radio" name="sexe" class="form-check-input" value="female" id="female">
             <label class="form-check-label">Female</label>
         </div>
-
-
     </div>
+
     <div class="row-mb-3 flex mb-4">
         <label class="col-form-label col-sm-2">Filiere:</label>
         <div class="col-sm-4">
@@ -85,7 +79,6 @@
                 %>
             </select>
         </div>
-
     </div>
 
     <button class="btn btn-primary" type="submit" value="">Submit</button>
@@ -113,13 +106,13 @@
         else if(sexe === "female"){
             female.checked = true;
         }
-
-
     }
 
     const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
     async function appendAlert (event) {
-
+        if(alertPlaceholder.innerHTML!=""){
+            alertPlaceholder.innerHTML = "";
+        }
         if(prenom.value === "" || nom.value === ""){
             event.preventDefault()
             const wrapper = document.createElement('div')
@@ -132,7 +125,6 @@
 
             alertPlaceholder.append(wrapper)
         }
-
     }
     form.addEventListener('submit', appendAlert);
 

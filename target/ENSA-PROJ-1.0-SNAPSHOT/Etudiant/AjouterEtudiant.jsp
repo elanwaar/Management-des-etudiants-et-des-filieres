@@ -1,12 +1,7 @@
 <%@ page import="ensat.dca.Model.Filiere" %>
 <%@ page import="ensat.dca.Services.FiliereService" %>
-<%@ page import="java.util.List" %><%--
-  Created by IntelliJ IDEA.
-  User: anwar
-  Date: 4/8/2023
-  Time: 2:05 PM
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="java.util.List" %>
+
 <head>
     <link href="${pageContext.request.contextPath}/ajouterEtudiant.css" rel="stylesheet">
 
@@ -17,9 +12,14 @@
 <body class="p-6">
 
 <div class="p-40 pt-0 m-10" style=" display: flex; align-items: center; flex-direction: column">
+
+    <!-- le message d'error si le champ nom ou prénom est vide -->
     <div id="liveAlertPlaceholder" style="width: 60%;"></div>
+
 <div class="card p-5" style="width: 60%;" id="bodyContainer">
+
 <form id="formId" method="post" class="mt-10 p-10" style="display: flex; flex-direction: column" method="post" action="${pageContext.request.contextPath}/EtudiantServlet?action=ajouter">
+
     <div class="row mb-3" style="display: flex; justify-content: center;">
         <label class="col-sm-2 col-form-label" >Nom:</label>
         <div class="col-sm-10">
@@ -27,13 +27,11 @@
         </div>
     </div>
 
-
     <div class="row mb-3">
         <label class="col-sm-2 col-form-label">Prenom:</label>
         <div class="col-sm-10">
             <input id="prenom" type="text" name="prenom" placeholder="Prenom" class="form-control"/>
         </div>
-
     </div>
 
     <div class="row mb-3">
@@ -43,8 +41,8 @@
             <label class="form-check-label">Male</label>
             <input type="radio" name="sexe" class="form-check-input" value="female" id="female">
             <label class="form-check-label">Female</label></div>
-
     </div>
+
     <div class="row mb-3">
         <label class="col-sm-2 col-form-label">Filiere:</label>
         <div class="col-sm-10">
@@ -61,14 +59,15 @@
                 %>
             </select>
         </div>
-
     </div>
+
     <button type="submit" class="btn btn-primary" >Submit</button>
 
 </form>
 </div>
 </div>
 </body>
+
 <script>
 
     const prenom = document.getElementById("prenom");
@@ -79,8 +78,11 @@
 
     const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
     async function appendAlert (event) {
-
+        if(alertPlaceholder.innerHTML!=""){
+            alertPlaceholder.innerHTML = "";
+        }
         if(prenom.value === "" || nom.value === ""){
+
             event.preventDefault()
             const wrapper = document.createElement('div')
             wrapper.innerHTML = [

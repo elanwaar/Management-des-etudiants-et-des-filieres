@@ -9,10 +9,16 @@
 
 <%@include file="../Components/Header.jspf" %>
 <%@include file="../Components/Navigation-Bar.jspf" %>
+
 <body class="p-6">
+
 <div class="p-40 pt-0 m-10 " style="display: flex; align-items: center; flex-direction: column">
-<div id="liveAlertPlaceholder" style="width: 60%;"></div>
+
+    <!-- le message d'error si le champ nom ou prénom est vide -->
+    <div id="liveAlertPlaceholder" style="width: 60%;"></div>
+
 <div class="card card p-10 " style="width: 60%;">
+
 <form id="formId" class="mt-10" method="post" action="${pageContext.request.contextPath}/FiliereServlet?action=edit&id=<%=request.getAttribute("id")%>">
     <%
         FiliereService filiereService = new FiliereService();
@@ -45,6 +51,9 @@
 
     const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
     async function appendAlert (event) {
+        if(alertPlaceholder.innerHTML!=""){
+            alertPlaceholder.innerHTML = "";
+        }
         if(nom.value === ""){
             event.preventDefault()
             const wrapper = document.createElement('div')

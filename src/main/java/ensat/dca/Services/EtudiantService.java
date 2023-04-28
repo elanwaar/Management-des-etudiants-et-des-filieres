@@ -1,5 +1,6 @@
 package ensat.dca.Services;
 import ensat.dca.Model.Etudiant;
+import ensat.dca.Model.Filiere;
 import ensat.dca.dao.IDAO;
 
 import java.sql.*;
@@ -11,6 +12,8 @@ import static ensat.dca.dao.DAO.getConnection;
 public class  EtudiantService implements IDAO<Etudiant>{
 
     private static Connection connexion;
+    Statement stmt;
+    private int noOfRecords;
 
     public EtudiantService(){
         connexion = getConnection();
@@ -61,19 +64,50 @@ public class  EtudiantService implements IDAO<Etudiant>{
 
     public List<Etudiant> FindAll(int offset, int noOfRecords) throws SQLException {
 
-        Statement st = connexion.createStatement();
-        ResultSet rs = st.executeQuery("select *from Etudiant");
-        List <Etudiant> list_Etudiants = new ArrayList();
-        while(rs.next()){
-            Etudiant etu = new Etudiant();
-            etu.setIdE(rs.getInt("idEtu"));
-            etu.setNom(rs.getString("nom"));
-            etu.setPrenom(rs.getString("prenom"));
-            etu.setSexe(rs.getString("sexe"));
-            etu.setIdF(Integer.parseInt(rs.getString("idFil")));
-            list_Etudiants.add(etu);
+        String query = "select SQL_CALC_FOUND_ROWS * from Etudiant limit " + offset + ", " + noOfRecords;
+        List <Etudiant> list_Etudiants = new ArrayList<>();
+        try{
+            stmt = connexion.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+
+            while(rs.next()){
+                Etudiant etu = new Etudiant();
+                etu.setIdE(rs.getInt("idEtu"));
+                etu.setNom(rs.getString("nom"));
+                etu.setPrenom(rs.getString("prenom"));
+                etu.setSexe(rs.getString("sexe"));
+                etu.setIdF(Integer.parseInt(rs.getString("idFil")));
+                list_Etudiants.add(etu);
+            }
+            rs.close();
+            rs = stmt.executeQuery("SELECT FOUND_ROWS()");
+
+            if (rs.next())
+                this.noOfRecords = rs.getInt(1);
         }
+
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         return list_Etudiants;
+    }
+
+    //Retourne le nombre total des filieres. On l'utilise dans EtudiantServlet pour décider le nombre des pages.
+    public int getNoOfRecords() {
+        String query = "select COUNT(*) from Etudiant";
+        int numberOfRecords = 0;
+        try {
+            stmt = connexion.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            if(rs.next()){
+                numberOfRecords = rs.getInt("COUNT(*)");
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return numberOfRecords;
     }
 
     public Etudiant FindById(int id) throws SQLException {

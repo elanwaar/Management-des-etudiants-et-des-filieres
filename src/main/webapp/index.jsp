@@ -14,31 +14,29 @@
                         <div id="filiereLogo">
                                 <img src="${pageContext.request.contextPath}/certificate.png" style ="width:150px; margin-top: 40px;" alt="">
                         </div>
-                        <div class="links">
+                        <div class="links" style="font-size: 15pt;">
                                 <ul>
                                         <li><a href="${pageContext.request.contextPath}/Filiere/AjouterFiliere.jsp"><h2 style="margin-bottom: 60px;">Ajouter un filiere</h2></a></li>
                                         <li><a href="${pageContext.request.contextPath}/FiliereServlet" ><h2>Afficher les filieres</h2></a></li>
                                 </ul>
                         </div>
-
                 </div>
                 <div id="etudiantCard" class="card">
                         <div id="etudiantLogo">
                                 <img src="${pageContext.request.contextPath}/graduation.png" style ="height:150px; margin-top: 40px;" alt="">
                         </div>
-                        <div class="links">
+                        <div class="links" style="font-size: 15pt;">
                                 <ul>
                                         <li><a href="${pageContext.request.contextPath}/Etudiant/AjouterEtudiant.jsp"><h2 style="margin-bottom: 60px;">Ajouter un etudiant</h2></a></li>
                                         <li><a href="${pageContext.request.contextPath}/EtudiantServlet"><h2>Afficher les etudiants</h2></a></li>
                                 </ul>
                         </div>
-
                 </div>
         </div>
+        <!-- 'ENSAT UNIVERSITY' Logo dans l'arriére plan -->
         <img src="${pageContext.request.contextPath}/ENSAT.png" alt="" id="bgEnsat">
 </div>
 
         <%@include file="Components/Footer.jspf" %>
-    </div>
-</div>
+
 </body>
